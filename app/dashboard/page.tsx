@@ -1,6 +1,3 @@
-import { ProjectGrid } from "@/components/dashboard/project-grid"
-import { DashboardStats } from "@/components/dashboard/dashboard-stats"
-import { RecentActivity } from "@/components/dashboard/recent-activity"
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import Link from "next/link"
@@ -18,8 +15,6 @@ export default function DashboardPage() {
         </Link>
       </div>
 
-      <DashboardStats />
-
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Recent Projects</h2>
@@ -29,10 +24,8 @@ export default function DashboardPage() {
             </Button>
           </Link>
         </div>
-        <ProjectGrid />
       </div>
 
-      <RecentActivity />
     </div>
   )
 }

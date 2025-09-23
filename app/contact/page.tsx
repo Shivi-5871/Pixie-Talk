@@ -10,8 +10,6 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Loader2 } from "lucide-react"
 import Image from "next/image"
-// import { Navbar } from "@/components/navbar" // Adjusted path and uncommented
-// import { Footer } from "@/components/footer" // Adjusted path and uncommented
 
 // Example image list
 const bgImages = [

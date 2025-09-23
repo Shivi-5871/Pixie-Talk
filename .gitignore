@@ -36,9 +36,6 @@ next-env.d.ts
 *.webm
 *.avi
 *.mov
-*.jpg
-*.jpeg
-*.gif
 
 # Story & asset output folders
 /record-static/

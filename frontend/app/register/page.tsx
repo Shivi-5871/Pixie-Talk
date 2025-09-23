@@ -3,7 +3,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -16,11 +16,7 @@ import Image from "next/image";
 import "react-toastify/dist/ReactToastify.css";
 
 // Example image list (replace with actual images or use a pattern)
-const bgImages = [
-  "/images/bg1.png", "/images/bg2.png", "/images/bg3.png", "/images/bg4.png",
-  "/images/bg5.png", "/images/bg6.png", "/images/bg17.png", "/images/bg8.png",
-  "/images/bg9.png", "/images/bg10.png", "/images/bg11.png", "/images/bg12.png",
-];
+
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +26,23 @@ export default function RegisterPage() {
     confirmPassword: "",
   });
   const [error, setError] = useState("");
+  const [bgImages, setBgImages] = useState<{ src: string; width: number; height: number }[]>([]);
+
+
   const router = useRouter();
+
+  useEffect(() => {
+    async function fetchImages() {
+      try {
+        const res = await fetch("/api/images");
+        const data = await res.json();
+        setBgImages(data);
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      }
+    }
+  fetchImages();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -91,13 +103,13 @@ export default function RegisterPage() {
     <div className="relative min-h-screen w-full overflow-hidden">
       {/* Background Grid of Images */}
       <div className="absolute inset-0 grid grid-cols-4 gap-1 opacity-80 z-0">
-        {bgImages.map((src, idx) => (
+        {bgImages.map((img, idx) => (
           <Image
             key={idx}
-            src={src}
+            src={img.src}
             alt={`bg-${idx}`}
-            width={300}
-            height={300}
+            width={img.width}
+            height={img.height}
             className="object-cover w-full h-full rounded-md"
           />
         ))}

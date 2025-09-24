@@ -2,21 +2,22 @@
 
 Pixie Talk is an AI-powered interactive storytelling platform that transforms your ideas into animated stories. It integrates story generation, voice narration, image creation, and video animation into one seamless pipeline.
 
-🚀 Features
+<b>🚀 Features</b>
+<ul>
+  <li>✨ AI Story Generation – Create engaging stories using Gemini API</li>
+    
+  <li>🗣️ Voice Narration – Convert story text into realistic voices with ElevenLabs API</li>
 
-✨ AI Story Generation – Create engaging stories using Gemini API
+  <li>🎨 Scene Illustrations – Generate images for each scene using Monster API</li>
 
-🗣️ Voice Narration – Convert story text into realistic voices with ElevenLabs API
+  <li>🎬 Video Animation – Animate images into videos with AI Video API</li>
 
-🎨 Scene Illustrations – Generate images for each scene using Monster API
+  <li>🎙️ Speech-to-Text & Text-to-Speech – Voice interactivity powered by Google Speech Recognition</li>
 
-🎬 Video Animation – Animate images into videos with AI Video API
+  <li>🔑 Authentication – Secure user login and signup</li>
 
-🎙️ Speech-to-Text & Text-to-Speech – Voice interactivity powered by Google Speech Recognition
-
-🔑 Authentication – Secure user login and signup
-
-💾 Data Handling – Store stories, audio, images, and videos persistently
+  <li>💾 Data Handling – Store stories, audio, images, and videos persistently</li>
+</ul>
 
 <h1>Tech Stack</h1>
 
@@ -149,3 +150,4 @@ Contributions are welcome 🎉
 <h1><b>📜 License</b></h1>
 
 Licensed under the MIT License – free to use, modify, and distribute.
+

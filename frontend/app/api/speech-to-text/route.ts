@@ -1,3 +1,4 @@
+//frontend/app/api/speech-to-text/route.ts
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
@@ -41,7 +42,7 @@ export async function POST(request: Request) {
     formData.append("audio", fs.createReadStream(tempFilePath));
     formData.append("user_id", session.user.id); // 🔥 Send user ID for authentication
 
-    const pythonBackendUrl = "http://localhost:5000/api/speech-to-text";
+    const pythonBackendUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/speech-to-text`;
     const response = await fetch(pythonBackendUrl, {
       method: "POST",
       body: formData,

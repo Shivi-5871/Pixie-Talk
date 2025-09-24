@@ -1,4 +1,4 @@
-# Pixie Talk #
+# Pixie Talk - AI-Powered Content Creation #
 
 Pixie Talk is an AI-powered interactive storytelling platform that transforms your ideas into animated stories. It integrates story generation, voice narration, image creation, and video animation into one seamless pipeline.
 
@@ -18,32 +18,58 @@ Pixie Talk is an AI-powered interactive storytelling platform that transforms yo
 
 💾 Data Handling – Store stories, audio, images, and videos persistently
 
-🛠️ Tech Stack
+<h1>Tech Stack</h1>
 
-Frontend (React + Next.js):
+<b>Frontend (React + Next.js):</b>
 
-Next.js
+* Next.js
 
-React
+* React
 
-TailwindCSS + shadcn/ui
+<b>Backend (Flask + Python):</b>
 
-Backend (Flask + Python):
+* Flask (REST API)
 
-Flask (REST API)
+* FFmpeg (video merging)
 
-FFmpeg (video merging)
+* MongoDB (database)
 
-MongoDB (database)
+<b>APIs & Integrations:</b>
 
-APIs & Integrations:
+* Gemini API – Story generation
 
-Gemini API – Story generation
+* ElevenLabs API – Voice generation
 
-ElevenLabs API – Voice generation
+* Monster API – Image generation
 
-Monster API – Image generation
+* AI Video API – Video creation
 
-AI Video API – Video creation
+* Google Speech Recognition
 
-Google Speech Recognition
+<h2>📂 Project Structure</h2>
+
+Pixie-Talk/
+│── backend/
+│   ├── app.py                  # Flask backend server
+│   ├── Animated Story Video.py # AI pipeline for story → video
+│   ├── render-build.sh         # Deployment build script
+│   ├── requirements.txt        # Python dependencies
+│   └── static/                 # Static assets (images, audio, video)
+│
+│── frontend/
+│   ├── app/                    # Next.js app directory
+│   ├── components/             # Reusable UI components
+│   ├── hooks/                  # Custom React hooks
+│   ├── lib/                    # Auth, DB, utils
+│   ├── models/                 # User & data models
+│   ├── public/                 # Public assets
+│   ├── record-static/          # Stored media files
+│   ├── styles/                 # Global styles
+│   ├── types/                  # TypeScript types
+│   ├── package.json            # Frontend dependencies
+│   ├── tailwind.config.js      # Tailwind config
+│   └── tsconfig.json           # TypeScript config
+│
+│── scripts/                    # Utility scripts
+│── .env                        # Environment variables
+│── README.md                   # Project documentation

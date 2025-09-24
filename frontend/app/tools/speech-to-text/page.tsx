@@ -16,7 +16,7 @@ const SpeechToText = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
+  const [userId, setUserId] = useState<string | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const SpeechToText = () => {
         const response = await fetch('/api/auth/check');
         const data = await response.json();
         setIsLoggedIn(data.isAuthenticated);
+        setUserId(data.user?.id || null);
       } catch (error) {
         setIsLoggedIn(false);
       } finally {
@@ -78,7 +79,9 @@ const SpeechToText = () => {
       mediaRecorder.onstop = async () => {
         const audioBlob = new Blob(audioChunks, { type: 'audio/webm;codecs=opus' });
         const formData = new FormData();
-        formData.append('audio', audioBlob);
+        // formData.append('audio', audioBlob);
+        formData.append("audio", audioBlob, "recording.webm"); // give it a filename
+        formData.append("user_id", userId ?? ""); // pass logged-in userId
 
         try {
           const response = await fetch('/api/speech-to-text', {

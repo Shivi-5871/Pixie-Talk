@@ -117,6 +117,8 @@ def check_auth():
 # Text-to-Speech API
 # -------------------------
 
+
+BASE_URL = os.getenv("BACKEND_BASE_URL", "http://localhost:5000")
 @app.route('/api/text-to-speech', methods=['POST'])
 def text_to_speech():
     data = request.form
@@ -138,7 +140,7 @@ def text_to_speech():
         tts = gTTS(text, lang=dest_lang)
         tts.save(audio_path)
 
-        audio_url = f"http://localhost:5000/static/{audio_filename}"
+        audio_url = f"{BASE_URL}/static/{audio_filename}"
 
         # Save to user's history in MongoDB
         user = users_collection.find_one({"_id": ObjectId(user_id)})

@@ -1,4 +1,4 @@
-# 🌟 Pixie Talk #
+# Pixie Talk #
 
 Pixie Talk is an AI-powered interactive storytelling platform that transforms your ideas into animated stories. It integrates story generation, voice narration, image creation, and video animation into one seamless pipeline.
 

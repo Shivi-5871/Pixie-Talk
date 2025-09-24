@@ -1,4 +1,4 @@
-
+// frontend/app/api/generate-images/route.ts
 
 import { NextResponse } from "next/server";
 import fetch from "node-fetch";

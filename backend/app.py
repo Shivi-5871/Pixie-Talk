@@ -117,55 +117,6 @@ def check_auth():
 # Text-to-Speech API
 # -------------------------
 
-
-# BASE_URL = os.getenv("BACKEND_BASE_URL", "http://localhost:5000")
-# @app.route('/api/text-to-speech', methods=['POST'])
-# def text_to_speech():
-#     data = request.form
-#     print("DEBUG - form data:", dict(data))
-#     user_id = data.get("user_id")  # Get user ID from request
-#     text = data.get("text")
-#     src_lang = data.get("src_lang", "en")
-#     dest_lang = data.get("dest_lang", "en")
-
-#     if not text or not user_id:
-#         return jsonify({"error": "Missing required fields"}), 400
-
-#     try:
-#         if src_lang != dest_lang:
-#             text = GoogleTranslator(source=src_lang, target=dest_lang).translate(text)
-
-#         audio_filename = f"{uuid.uuid4().hex}.mp3"
-#         audio_path = os.path.join(STATIC_FOLDER, audio_filename)
-#         tts = gTTS(text, lang=dest_lang)
-#         tts.save(audio_path)
-
-#         audio_url = f"{BASE_URL}/static/{audio_filename}"
-
-#         # Save to user's history in MongoDB
-#         user = users_collection.find_one({"_id": ObjectId(user_id)})
-#         if user:
-#             users_collection.update_one(
-#                 {"_id": ObjectId(user_id)},
-#                 {"$push": {
-#                     "ttsHistory": {
-#                         "text": text,
-#                         "srcLang": src_lang,
-#                         "destLang": dest_lang,
-#                         "audioUrl": audio_url,
-#                         "createdAt": datetime.utcnow()
-#                     }
-#                 }}
-#             )
-
-#         return jsonify({"audioUrl": audio_url})
-#     except Exception as e:
-#         import traceback; traceback.print_exc() 
-#         return jsonify({"error": str(e)}), 500
-
-
-
-
 BASE_URL = os.getenv("BACKEND_BASE_URL", "http://localhost:5000")
 
 @app.route('/api/text-to-speech', methods=['POST'])

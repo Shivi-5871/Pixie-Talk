@@ -1,11 +1,10 @@
-
+// frontend/app/tools/text-to-image/page.tsx
 
 "use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2, Download } from "lucide-react";

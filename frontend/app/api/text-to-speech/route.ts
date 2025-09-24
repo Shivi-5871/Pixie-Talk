@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     formData.append("src_lang", src_lang);
     formData.append("dest_lang", dest_lang);
 
-    const BACKEND_URL = "http://localhost:5000/api/text-to-speech";
+    const BACKEND_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/text-to-speech`;
     const response = await axios.post(BACKEND_URL, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });

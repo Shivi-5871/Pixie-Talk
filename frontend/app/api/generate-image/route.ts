@@ -1,3 +1,5 @@
+// frontend/app/api/generate-image/route.ts
+
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {

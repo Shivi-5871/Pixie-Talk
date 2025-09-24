@@ -8,7 +8,7 @@ export async function transcribeAudio(audioBlob: Blob): Promise<string | null> {
       const recognition = new (window as any).webkitSpeechRecognition();
       recognition.continuous = false;
       recognition.interimResults = false;
-      recognition.lang = 'en-US';
+      recognition.lang = 'en';
   
       recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
@@ -20,13 +20,6 @@ export async function transcribeAudio(audioBlob: Blob): Promise<string | null> {
         resolve(null);
       };
   
-      // Remove audio playback logic
-      // const audioUrl = URL.createObjectURL(audioBlob);
-      // const audio = new Audio(audioUrl);
-      // audio.onended = () => {
-      //   recognition.stop();
-      //   URL.revokeObjectURL(audioUrl);
-      // };
   
       recognition.start();
       // No audio.play() call

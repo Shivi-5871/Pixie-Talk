@@ -113,7 +113,7 @@ export default function VoiceToImage() {
         recognitionRef.current = recognition;
         recognition.continuous = false;
         recognition.interimResults = false;
-        recognition.lang = 'en-US';
+        recognition.lang = 'en';
         recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript;
 

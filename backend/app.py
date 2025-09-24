@@ -177,8 +177,8 @@ def text_to_speech():
 # Speech-to-Text API
 # -------------------------
 
-@app.route('/api/speech-to-text', methods=['POST'])
-def speech_to_text():
+# @app.route('/api/speech-to-text', methods=['POST'])
+# def speech_to_text():
     try:
         if 'audio' not in request.files or 'user_id' not in request.form:
             return jsonify({"error": "No audio file or user ID provided"}), 400
@@ -207,12 +207,6 @@ def speech_to_text():
         output_file = os.path.join(STATIC_FOLDER, f"{uuid.uuid4()}.txt")
         script_path = os.path.join(SCRIPTS_FOLDER, "Speech-To-Text.py")
 
-        # result = subprocess.run(
-        #     ["python", script_path, output_file, audio_path],
-        #     check=True,
-        #     capture_output=True,
-        #     text=True,
-        # )
 
 
         result = subprocess.run(
@@ -251,6 +245,80 @@ def speech_to_text():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
+@app.route('/api/speech-to-text', methods=['POST'])
+def speech_to_text():
+    try:
+        if 'audio' not in request.files or 'user_id' not in request.form:
+            return jsonify({"error": "No audio file or user ID provided"}), 400
+        
+        user_id = request.form['user_id']
+        audio_file = request.files['audio']
+
+        # Secure filename and save audio file
+        filename = secure_filename(audio_file.filename or f"{uuid.uuid4()}.webm")
+        file_ext = filename.rsplit(".", 1)[-1].lower()
+        new_filename = f"{uuid.uuid4()}.{file_ext}"
+        audio_path = os.path.join(STATIC_FOLDER, new_filename)
+        audio_file.save(audio_path)
+
+        # Convert audio to WAV format (explicit webm→wav)
+        try:
+            audio = AudioSegment.from_file(audio_path, format="webm")
+            wav_filename = f"{uuid.uuid4()}.wav"
+            wav_path = os.path.join(STATIC_FOLDER, wav_filename)
+            audio.export(wav_path, format="wav")
+            os.remove(audio_path)  # remove original webm
+            audio_path = wav_path
+        except Exception as e:
+            import traceback; traceback.print_exc()
+            return jsonify({"error": "Audio conversion failed", "details": str(e)}), 500
+
+        # Run external Python STT script
+        output_file = os.path.join(STATIC_FOLDER, f"{uuid.uuid4()}.txt")
+        script_path = os.path.join(SCRIPTS_FOLDER, "Speech-To-Text.py")
+
+        result = subprocess.run(
+            ["python", script_path, output_file, audio_path],
+            capture_output=True,
+            text=True
+        )
+
+        print("STDOUT:", result.stdout)
+        print("STDERR:", result.stderr)
+        print("RETURN CODE:", result.returncode)
+
+        if result.returncode != 0:
+            return jsonify({"error": result.stderr.strip()}), 500
+
+        # Read transcription result
+        with open(output_file, "r") as file:
+            transcription = file.read()
+
+        # Cleanup
+        if os.path.exists(audio_path): os.remove(audio_path)
+        if os.path.exists(output_file): os.remove(output_file)
+
+        # Build accessible audio URL
+        audio_url = f"{BASE_URL}/static/{os.path.basename(audio_path)}"
+
+        # Save transcription to MongoDB
+        users_collection.update_one(
+            {"_id": ObjectId(user_id)},
+            {"$push": {
+                "audioTranscriptions": {
+                    "audioUrl": audio_url,
+                    "text": transcription,
+                    "createdAt": datetime.utcnow()
+                }
+            }},
+            upsert=True
+        )
+
+        return jsonify({"text": transcription})
+    except Exception as e:
+        import traceback; traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
 
 
 

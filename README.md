@@ -48,7 +48,7 @@ Pixie Talk is an AI-powered interactive storytelling platform that transforms yo
 
 <h2>📂 Project Structure</h2>
 
-Pixie-Talk/
+```Pixie-Talk/
 │── backend/
 │   ├── app.py                  # Flask backend server
 │   ├── Animated Story Video.py # AI pipeline for story → video
@@ -73,3 +73,79 @@ Pixie-Talk/
 │── scripts/                    # Utility scripts
 │── .env                        # Environment variables
 │── README.md                   # Project documentation
+```
+
+<h1><b>⚙️ Installation & Setup</b></h1>
+
+<b>1. Clone the repository</b>
+```
+git clone https://github.com/Shivi-5871/Pixie-Talk.git
+cd pixie-talk
+```
+
+<b>2. Backend Setup</b>
+```
+cd backend
+pip install -r requirements.txt
+python app.py
+```
+
+<b>3. Frontend Setup</b>
+```
+cd ../frontend
+npm install
+npm run dev
+```
+
+<b>4. Environment Variables</b>
+
+Create a .env file in both backend and frontend with the following:
+
+<b>Backend .env:</b>
+```
+MONGO_URI=your_mongo_uri
+GEMINI_API_KEY=your_key_here
+ELEVENLABS_API_KEY=your_key_here
+MONSTER_API_KEY=your_key_here
+AI_VIDEO_API_KEY=your_key_here
+```
+
+<b>Frontend .env.local:</b>
+```
+NEXT_PUBLIC_API_URL=http://localhost:5000
+and other API keys
+```
+
+<h1>📖 Usage</h1>
+<ol type="1">
+  <li>Sign up / Log in</li>
+  
+  <li>Enter a theme → generate a story</li>
+
+  <li>Generate scene images</li>
+
+  <li>Add voice narration</li>
+
+  <li>Compile into video</li>
+
+  <li>Download or share</li>
+</ol>
+
+
+<h1><b>🤝 Contributing</b></h1>
+
+Contributions are welcome 🎉
+
+<ol type="1">
+  <li>Fork the repo</li>
+
+  <li>Create a new branch (feature-xyz)</li>
+
+  <li>Commit changes</li>
+
+  <li>Submit a Pull Request</li>
+</ol>
+
+<h1><b>📜 License</b></h1>
+
+Licensed under the MIT License – free to use, modify, and distribute.

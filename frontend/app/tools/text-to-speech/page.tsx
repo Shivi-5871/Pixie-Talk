@@ -43,8 +43,8 @@ const TextToSpeechPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
   const [text, setText] = useState<string>("");
-  const [sourceLanguage, setSourceLanguage] = useState<string>("en-US");
-  const [targetLanguage, setTargetLanguage] = useState<string>("en-US");
+  const [sourceLanguage, setSourceLanguage] = useState<string>("en");
+  const [targetLanguage, setTargetLanguage] = useState<string>("en");
   const [loading, setLoading] = useState<boolean>(false);
   const [audioSrc, setAudioSrc] = useState<string | null>(null);
 
@@ -85,7 +85,6 @@ const TextToSpeechPage = () => {
         headers: { "Content-Type": "application/json" },
       });
 
-      // if (!response.ok) throw new Error("Failed to generate speech");
       if (!response.ok) {
         if (response.status === 401) {
           // If unauthorized, redirect to login

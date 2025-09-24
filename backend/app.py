@@ -1,3 +1,5 @@
+# backend/app.py
+from unittest import result
 from flask import Flask, request, jsonify, send_from_directory, session
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
@@ -118,6 +120,7 @@ def check_auth():
 @app.route('/api/text-to-speech', methods=['POST'])
 def text_to_speech():
     data = request.form
+    print("DEBUG - form data:", dict(data))
     user_id = data.get("user_id")  # Get user ID from request
     text = data.get("text")
     src_lang = data.get("src_lang", "en")
@@ -155,6 +158,7 @@ def text_to_speech():
 
         return jsonify({"audioUrl": audio_url})
     except Exception as e:
+        import traceback; traceback.print_exc() 
         return jsonify({"error": str(e)}), 500
 
 
@@ -195,12 +199,25 @@ def speech_to_text():
         output_file = os.path.join(STATIC_FOLDER, f"{uuid.uuid4()}.txt")
         script_path = os.path.join(SCRIPTS_FOLDER, "Speech-To-Text.py")
 
+        # result = subprocess.run(
+        #     ["python", script_path, output_file, audio_path],
+        #     check=True,
+        #     capture_output=True,
+        #     text=True,
+        # )
+
+
         result = subprocess.run(
             ["python", script_path, output_file, audio_path],
-            check=True,
             capture_output=True,
-            text=True,
-        )
+            text=True
+            )
+        print("STDOUT:", result.stdout)
+        print("STDERR:", result.stderr)
+        print("RETURN CODE:", result.returncode)
+
+        if result.returncode != 0:
+            return jsonify({"error": result.stderr.strip()}), 500
 
         with open(output_file, "r") as file:
             transcription = file.read()

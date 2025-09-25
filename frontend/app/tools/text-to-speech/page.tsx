@@ -168,7 +168,7 @@ const TextToSpeechPage = () => {
                     <SelectItem value="de">German</SelectItem>
                     <SelectItem value="hi">Hindi</SelectItem>
                     <SelectItem value="ur">Urdu</SelectItem>
-                    <SelectItem value="zh-CN">Chinese (Mandarin)</SelectItem>
+                    <SelectItem value="zh">Chinese (Mandarin)</SelectItem>
                     <SelectItem value="ja">Japanese</SelectItem>
                     <SelectItem value="ko">Korean</SelectItem>
                     <SelectItem value="it">Italian</SelectItem>
@@ -193,7 +193,7 @@ const TextToSpeechPage = () => {
                     <SelectItem value="de">German</SelectItem>
                     <SelectItem value="hi">Hindi</SelectItem>
                     <SelectItem value="ur">Urdu</SelectItem>
-                    <SelectItem value="zh-CN">Chinese (Mandarin)</SelectItem>
+                    <SelectItem value="zh">Chinese (Mandarin)</SelectItem>
                     <SelectItem value="ja">Japanese</SelectItem>
                     <SelectItem value="ko">Korean</SelectItem>
                     <SelectItem value="it">Italian</SelectItem>

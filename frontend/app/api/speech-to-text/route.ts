@@ -92,39 +92,51 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Get audio file from posted form
     const form = await request.formData();
     const audioFile = form.get("audio") as File;
 
     if (!audioFile || !(audioFile instanceof File)) {
       console.error("Invalid or missing audio file.");
-      return NextResponse.json({ error: "No valid audio file provided." }, { status: 400 });
+      return NextResponse.json(
+        { error: "No valid audio file provided." },
+        { status: 400 }
+      );
     }
 
-    // Save audio buffer (still works locally)
+    // Convert to Buffer (this still works locally)
+    const buffer = Buffer.from(await audioFile.arrayBuffer());
+
+    // Optional: save locally (good for dev)
     const tempFilePath = path.join(STATIC_FOLDER, audioFile.name || "recording.webm");
     await fs.promises.mkdir(STATIC_FOLDER, { recursive: true });
-    const buffer = Buffer.from(await audioFile.arrayBuffer());
     await fs.promises.writeFile(tempFilePath, buffer);
 
-    // Build correct FormData (native, no extra headers, no node-fetch)
+    // Build FormData (native, no getHeaders)
     const formData = new FormData();
     formData.append("audio", new Blob([buffer]), audioFile.name || "recording.webm");
     formData.append("user_id", session.user.id);
 
     // Call Flask backend
     const pythonBackendUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/speech-to-text`;
+    console.log("Calling backend at:", pythonBackendUrl);
+
     const response = await fetch(pythonBackendUrl, {
       method: "POST",
       body: formData,
+      // ⚠️ DO NOT set headers manually; fetch handles boundary + multipart
     });
 
-    // Clean up temp file
+    // Cleanup local (dev)
     await fs.promises.unlink(tempFilePath);
 
     if (!response.ok) {
       const errorResponse = await response.text();
       console.error("Python backend error:", errorResponse);
-      return NextResponse.json({ error: errorResponse || "Unknown error" }, { status: response.status });
+      return NextResponse.json(
+        { error: errorResponse || "Unknown error" },
+        { status: response.status }
+      );
     }
 
     const result = (await response.json()) as SpeechToTextResponse;
@@ -133,6 +145,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ text: result.text });
   } catch (error) {
     console.error("Internal server error in route.ts:", error);
-    return NextResponse.json({ error: "Internal server error." }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error." },
+      { status: 500 }
+    );
   }
 }

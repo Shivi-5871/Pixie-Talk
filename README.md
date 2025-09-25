@@ -1,49 +1,153 @@
-# Pixie Talk #
+# Pixie Talk - AI-Powered Content Creation #
 
 Pixie Talk is an AI-powered interactive storytelling platform that transforms your ideas into animated stories. It integrates story generation, voice narration, image creation, and video animation into one seamless pipeline.
 
-🚀 Features
+<b>🚀 Features</b>
+<ul>
+  <li>✨ AI Story Generation – Create engaging stories using Gemini API</li>
+    
+  <li>🗣️ Voice Narration – Convert story text into realistic voices with ElevenLabs API</li>
 
-✨ AI Story Generation – Create engaging stories using Gemini API
+  <li>🎨 Scene Illustrations – Generate images for each scene using Monster API</li>
 
-🗣️ Voice Narration – Convert story text into realistic voices with ElevenLabs API
+  <li>🎬 Video Animation – Animate images into videos with AI Video API</li>
 
-🎨 Scene Illustrations – Generate images for each scene using Monster API
+  <li>🎙️ Speech-to-Text & Text-to-Speech – Voice interactivity powered by Google Speech Recognition</li>
 
-🎬 Video Animation – Animate images into videos with AI Video API
+  <li>🔑 Authentication – Secure user login and signup</li>
 
-🎙️ Speech-to-Text & Text-to-Speech – Voice interactivity powered by Google Speech Recognition
+  <li>💾 Data Handling – Store stories, audio, images, and videos persistently</li>
+</ul>
 
-🔑 Authentication – Secure user login and signup
+<h1>Tech Stack</h1>
 
-💾 Data Handling – Store stories, audio, images, and videos persistently
+<b>Frontend (React + Next.js):</b>
 
-🛠️ Tech Stack
+* Next.js
 
-Frontend (React + Next.js):
+* React
 
-Next.js
+<b>Backend (Flask + Python):</b>
 
-React
+* Flask (REST API)
 
-TailwindCSS + shadcn/ui
+* FFmpeg (video merging)
 
-Backend (Flask + Python):
+* MongoDB (database)
 
-Flask (REST API)
+<b>APIs & Integrations:</b>
 
-FFmpeg (video merging)
+* Gemini API – Story generation
 
-MongoDB (database)
+* ElevenLabs API – Voice generation
 
-APIs & Integrations:
+* Monster API – Image generation
 
-Gemini API – Story generation
+* AI Video API – Video creation
 
-ElevenLabs API – Voice generation
+* Google Speech Recognition
 
-Monster API – Image generation
+<h2>📂 Project Structure</h2>
 
-AI Video API – Video creation
+```Pixie-Talk/
+│── backend/
+│   ├── app.py                  # Flask backend server
+│   ├── Animated Story Video.py # AI pipeline for story → video
+│   ├── render-build.sh         # Deployment build script
+│   ├── requirements.txt        # Python dependencies
+│   └── static/                 # Static assets (images, audio, video)
+│
+│── frontend/
+│   ├── app/                    # Next.js app directory
+│   ├── components/             # Reusable UI components
+│   ├── hooks/                  # Custom React hooks
+│   ├── lib/                    # Auth, DB, utils
+│   ├── models/                 # User & data models
+│   ├── public/                 # Public assets
+│   ├── record-static/          # Stored media files
+│   ├── styles/                 # Global styles
+│   ├── types/                  # TypeScript types
+│   ├── package.json            # Frontend dependencies
+│   ├── tailwind.config.js      # Tailwind config
+│   └── tsconfig.json           # TypeScript config
+│
+│── scripts/                    # Utility scripts
+│── .env                        # Environment variables
+│── README.md                   # Project documentation
+```
 
-Google Speech Recognition
+<h1><b>⚙️ Installation & Setup</b></h1>
+
+<b>1. Clone the repository</b>
+```
+git clone https://github.com/Shivi-5871/Pixie-Talk.git
+cd pixie-talk
+```
+
+<b>2. Backend Setup</b>
+```
+cd backend
+pip install -r requirements.txt
+python app.py
+```
+
+<b>3. Frontend Setup</b>
+```
+cd ../frontend
+npm install
+npm run dev
+```
+
+<b>4. Environment Variables</b>
+
+Create a .env file in both backend and frontend with the following:
+
+<b>Backend .env:</b>
+```
+MONGO_URI=your_mongo_uri
+GEMINI_API_KEY=your_key_here
+ELEVENLABS_API_KEY=your_key_here
+MONSTER_API_KEY=your_key_here
+AI_VIDEO_API_KEY=your_key_here
+```
+
+<b>Frontend .env.local:</b>
+```
+NEXT_PUBLIC_API_URL=http://localhost:5000
+and other API keys
+```
+
+<h1>📖 Usage</h1>
+<ol type="1">
+  <li>Sign up / Log in</li>
+  
+  <li>Enter a theme → generate a story</li>
+
+  <li>Generate scene images</li>
+
+  <li>Add voice narration</li>
+
+  <li>Compile into video</li>
+
+  <li>Download or share</li>
+</ol>
+
+
+<h1><b>🤝 Contributing</b></h1>
+
+Contributions are welcome 🎉
+
+<ol type="1">
+  <li>Fork the repo</li>
+
+  <li>Create a new branch (feature-xyz)</li>
+
+  <li>Commit changes</li>
+
+  <li>Submit a Pull Request</li>
+</ol>
+
+<h1><b>📜 License</b></h1>
+
+Licensed under the MIT License – free to use, modify, and distribute.
+
